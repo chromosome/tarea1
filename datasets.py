@@ -1,22 +1,14 @@
-# from random import random, uniform, randint, sample
-
-# n = 100
-# print(sample(range(0, n), n))
-
 def write_array_data(n):
 	import numpy as np
 	a = np.random.choice(n, n, replace=False)
 	d = np.concatenate([[n], a])
-	print(d)
-	d.astype('int32').tofile(f"data/sort/{n}.dat")
+	d.astype('int32').tofile(f'data/sort/{n}.dat')
 
 def write_matrix_data(n):
 	import numpy as np
 	a = np.random.choice(n**2, n**2, replace=False)
 	d = np.concatenate([[n], a])
-	print(d)
-	d.astype('int32').tofile(f"data/matrix/{n}.dat")
-
+	d.astype('int32').tofile(f'data/matrix/{n}.dat')
 
 def write_array_files():
 	array_sizes = [100, 200, 300, 400, 500, 
