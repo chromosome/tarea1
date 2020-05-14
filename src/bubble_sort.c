@@ -12,7 +12,7 @@ int main(int argc, char const *argv[])
 	int* a = read_binary_file(&n, argv[1]);
 
 	double t = high_res_profile(a, n, bubble_sort);
-	printf("%i: %f\n", n, t/1e6);
+	printf("%i:%f\n", n, t/1e6);
 
 	return 0;
 }

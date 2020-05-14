@@ -55,36 +55,6 @@ void col_major_mult_nml (int* c, int* a, int* b, int n, int m, int l) {
 				c[i*n + j] += a[i*n + k]*b[k*m + j];
 }
 
-int* zeros(int n) {
-	return (int*) calloc(n*n, sizeof(int));
-}
-
-int* ones(int n) {
-	int* mat = allocate_matrix(n);
-	for (int i = 0; i < n; i++)
-		for (int j = 0; j < n; j++)
-			mat[i*n+j] = 1;
-	return mat;
-}
-
-void scalar_mult(int* mat, int n, int scalar) {
-	for (int i = 0; i < n; i++)
-		for (int j = 0; j < n; j++)
-			mat[i*n+j] = mat[i*n+j]*scalar;
-}
-
-void mat_sum (int* c, int*a , int* b, int n) {
-	for (int i = 0; i < n; i++)
-		for (int j = 0; j < n; j++)
-			c[i*n + j] = a[i*n + j] + b[i*n + j];
-}
-
-void mat_sub (int* c, int*a , int* b, int n) {
-	for (int i = 0; i < n; i++)
-		for (int j = 0; j < n; j++)
-			c[i*n + j] = a[i*n + j] - b[i*n + j];
-}
-
 void strassen (int* c, int* a, int *b, int n) {
 	if (n == 1) {
 		c[0] += a[0]*b[0];

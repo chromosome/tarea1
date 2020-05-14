@@ -19,23 +19,22 @@ int* read_binary_file(int* n, const char* file) {
 	return dest;
 }
 
-// int read_binary_file2(int** dest, char* file) {
-// 	FILE *f;
+int* read_binary_mat_file(int* n, const char* file) {
+	FILE *f;
 
-// 	if ( !(f = fopen(file, "rb")) ) {
-// 		printf("[Error]: No se puede abrir archivo.%s\n\n", file);
-// 		return -1;
-// 	}
+	if ( !(f = fopen(file, "rb")) ) {
+		printf("[Error]: No se puede abrir archivo.%s\n\n", file);
+		return NULL;
+	}
 
-// 	int n;
-// 	fread(&n, sizeof(int), 1, f);
+	fread(n, sizeof(int), 1, f);
 
-// 	dest = (int*) malloc(n*sizeof(int));
-// 	fread(*dest, sizeof(int), n, f);
+	int* dest = (int*) malloc((*n)*(*n)*sizeof(int));
+	fread(dest, sizeof(int), (*n)*(*n), f);
 
-// 	fclose(f);
+	fclose(f);
 
-// 	return n;
-// }
+	return dest;
+}
 
 #endif

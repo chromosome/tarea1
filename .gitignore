@@ -1,6 +1,7 @@
-bin/
+build/
 data/
 results/
 src/test*
+*.png
 *.sublime-project
 *.sublime-workspace

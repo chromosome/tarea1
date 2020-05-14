@@ -5,7 +5,51 @@
 #include <stdio.h>
 #include "common.h"
 
-typedef int* matrix;
+typedef void (*mat_mult_t)     (int* w, int* v, int* u, int n);
+typedef void (*mat_mult_nm_t)  (int* w, int* v, int* u, int n, int m);
+typedef void (*mat_mult_nml_t) (int* w, int* v, int* u, int n, int m, int l);
+
+double high_res_mat_profile (int* w, int* v, int* u, 
+							 int n, 
+							 mat_mult_t mult) {
+	struct timespec start, stop;
+	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start);
+
+	mult(w, v, u, n);
+
+	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &stop);
+	double result = (stop.tv_sec - start.tv_sec) * 1e6 
+				  + (stop.tv_nsec - start.tv_nsec) / 1e3;
+	return result;
+}
+
+double high_res_mat_profile_nm (int* w, int* v, int* u, 
+								int n, int m, 
+								mat_mult_nm_t mult) {
+	struct timespec start, stop;
+	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start);
+
+	mult(w, v, u, n, m);
+
+	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &stop);
+	double result = (stop.tv_sec - start.tv_sec) * 1e6 
+				  + (stop.tv_nsec - start.tv_nsec) / 1e3;
+	return result;
+}
+
+double high_res_mat_profile_nml (int* w, int* v, int* u, 
+								 int n, int m, int l,
+								 mat_mult_nml_t mult) {
+	struct timespec start, stop;
+	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start);
+
+	mult(w, v, u, n, m, l);
+
+	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &stop);
+	double result = (stop.tv_sec - start.tv_sec) * 1e6 
+				  + (stop.tv_nsec - start.tv_nsec) / 1e3;
+	return result;
+}
 
 
 int* allocate_matrix (int n) {
@@ -92,6 +136,36 @@ void copy_submatrix(int* dest, int* src, int n) {
 	for (int i = 0, k = 0; i < n; ++i, k+=n)
 		for (int j = 0; j < n; ++j)
 			dest[i*n+k+j] = src[i*n+j];
+}
+
+int* zeros(int n) {
+	return (int*) calloc(n*n, sizeof(int));
+}
+
+int* ones(int n) {
+	int* mat = allocate_matrix(n);
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			mat[i*n+j] = 1;
+	return mat;
+}
+
+void scalar_mult(int* mat, int n, int scalar) {
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			mat[i*n+j] = mat[i*n+j]*scalar;
+}
+
+void mat_sum (int* c, int*a , int* b, int n) {
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			c[i*n + j] = a[i*n + j] + b[i*n + j];
+}
+
+void mat_sub (int* c, int*a , int* b, int n) {
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			c[i*n + j] = a[i*n + j] - b[i*n + j];
 }
 
 #endif

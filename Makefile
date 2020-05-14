@@ -1,9 +1,9 @@
 # TARGETS       := 
 CC            := gcc
-CFLAGS        := -Wall -g
+CFLAGS        := -Wall #-pg
 SOURCE_DIR    := src
 SRCS          := $(addsuffix .c, $(TARGETS))
-BUILD_DIR     := bin
+BUILD_DIR     := build
 OBJS          := $(SRCS:.c=.o)
 PATH_OBJS     := $(addprefix $(BUILD_DIR)/, $(OBJS))
 INCLUDE_DIR   := $(SOURCE_DIR)/include
@@ -20,14 +20,14 @@ $(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.c $(INCLUDE_DIR)/$(HDRS) | $(BUILD_DIR)
 	@$(CC) $(INCLUDE_PATHS) $(CFLAGS) -c $< -o $@
 
 $(BUILD_DIR):
-	@mkdir -p bin
+	@mkdir -p $@
 
 .PHONY: clean
 clean:
 	@rm -f $(BUILD_DIR)/*.o
-	@echo "[done]"
+	@echo "[done]" $@
 
 .PHONY: distclean
 distclean:
 	@rm -rf $(BUILD_DIR)
-	@echo "[done]"
+	@echo "[done]" $@
