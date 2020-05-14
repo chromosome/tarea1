@@ -2,7 +2,7 @@
 
 ## Dependencias
 
-Para generar los datos de entrada y de salida se requiere numpy, scipy y matplotlib.
+Para generar los datos de entrada y graficar los de salida se requiere numpy, scipy y matplotlib.
 
 ## Uso
 
