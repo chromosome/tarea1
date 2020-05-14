@@ -1,0 +1,6 @@
+bin/
+data/
+results/
+src/test*
+*.sublime-project
+*.sublime-workspace
