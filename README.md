@@ -26,4 +26,4 @@ Una vez compilados pueden ejecutarse mediante:
 ```
 El tiempo de ejecución se escribe a un archivo con el nombre_del_programa en la carpeta "results".
 
-Para generar los graficos
+Para generar los datos de entrada utilice datasets.py. Para graficar los datos de salida utilice plot.py
