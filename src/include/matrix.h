@@ -9,12 +9,10 @@ typedef int* matrix;
 
 
 int* allocate_matrix (int n) {
-	// return (int*) malloc(n*n*sizeof(int));
 	return (int*) calloc(n*n, sizeof(int));
 }
 
 int* allocate_matrix_nm (int n, int m) {
-	// return (int*) malloc(n*m*sizeof(int));
 	return (int*) calloc(n*m, sizeof(int));
 }
 
@@ -83,7 +81,6 @@ int* transpose_nm(int* mat, int n, int m) {
 }
 
 int* sub_matrix(int* src, int n) {
-	// int m = n/2;
 	int* sub = allocate_matrix(n);
 	for (int i = 0, k = 0; i < n; ++i, k+=n)
 		for (int j = 0; j < n; ++j)
@@ -96,17 +93,5 @@ void copy_submatrix(int* dest, int* src, int n) {
 		for (int j = 0; j < n; ++j)
 			dest[i*n+k+j] = src[i*n+j];
 }
-
-
-// int** allocate_matrix (int n) {
-// 	int* cols = (int*) malloc(n*n*sizeof(int));
-// 	int** rows = (int**) malloc(n*sizeof(int*));
-
-// 	return rows;
-// }
-
-// int** allocate_matrix_nm (int n, int m) {
-// 	return (int**) malloc(n*m*sizeof(int));
-// }
 
 #endif

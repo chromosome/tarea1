@@ -22,7 +22,6 @@ double high_res_profile (int* v, int n, sort_t sort) {
 
 	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &stop);
 
-	// microsegundos
 	double result = (stop.tv_sec - start.tv_sec) * 1e6 
 				  + (stop.tv_nsec - start.tv_nsec) / 1e3;
 	return result;
@@ -38,7 +37,6 @@ void print_array (int* v, int n) {
 void print_named_array (int* v, int n, char* name) {
 	printf("%s: ", name);
 	print_array(v, n);
-	// printf(" | n: %i\n", n);
 	printf("\n");
 }
 
@@ -72,36 +70,6 @@ int* merge (int* a, int na, int* b, int nb) {
 	return v;
 }
 
-// int* merge (int* a, int n, int* b, int m) {
-// 	int i = 0;
-// 	int j = 0;
-// 	int k = 0;
-// 	int* v = (int*) malloc((n+m)*sizeof(int));
-
-// 	while (k < n+m/*i < n || j < m*/) {
-// 		// if (a[i] > b[j] || i == n) {
-// 		if (i < n && a[i] < b[j]){
-// 			v[k] = a[i];
-// 			++i;
-// 		}
-// 		else {
-// 			v[k] = b[j];
-// 			++j;
-// 		}
-// 		++k;
-// 	}
-// 	printf("k: %i, j: %i\n", k, j);
-// 	if (i == n) {
-// 		v[k] = b[j];
-// 	}
-
-// 	return v;
-// }
-
-void merge2 (int* a, int na, int* b, int nb, int* v) {
-
-}
-
 int partition (int* v, int n) {
 	int f = 1;
 	for (int i = 2; i < n; ++i) {
@@ -122,29 +90,6 @@ int partition (int* v, int n) {
 		swap(v, v+f-1);
 
 	return f-1;
-}
-
-// int partition (int* v, int n) {
-// 	printf("\n");
-// 	int f = 1;
-// 	for (int i = 1; i < n; ++i) {
-// 		printf("v[%i]: %i, v[%i]: %i\n", f, v[f], i, v[i]);
-// 		print_named_array(v, n, "v");
-// 		if (v[0] > v[i])
-// 		 {
-// 			swap(v+i, v+f);
-// 			if (v[i] > v[f])
-// 				++f;
-// 		}
-// 	}
-// 	swap(v, v+f-1);
-// 	printf("\n");
-// 	print_named_array(v, n, "v");
-// 	return f-1;
-// }
-
-void partition2 (int* v, int n) {
-
 }
 
 #endif

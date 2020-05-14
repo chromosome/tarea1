@@ -21,31 +21,17 @@ void col_major_mult (int* c, int* a, int* b, int n) {
 void row_major_mult_nm (int* c, int* a, int* b, int n, int m) {
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < n; j++)
-			for (int k = 0; k < m; k++) {
+			for (int k = 0; k < m; k++)
 				c[i*n + j] += a[i*m + k]*b[k*n + j];
-				printf("a[%i,%i]: %i, ", i, k, a[i*m+k]);
-				printf("b[%i,%i]: %i, ", k, j, b[k*n+j]);
-				printf("a[%i,%i]*b[%i,%i]: %i\n", i,k,k,j, a[i*m+k]*b[k*n+j]);
-				printf("c[%i,%i]: %i\n", i, j, c[i*n+j]);
-				printf("\n");
-			}
 }
 
 void col_major_mult_nm (int* c, int* a, int* b, int n, int m) {
 	b = transpose_nm(b, m, n);
 	print_named_array(b, n*m, "bt");
 	for (int i = 0; i < n; i++)
-		for (int j = 0; j < m; j++) {
-			for (int k = 0; k < m; k++) {
+		for (int j = 0; j < m; j++)
+			for (int k = 0; k < m; k++)
 				c[i*n + j] += a[i*m + k]*b[j*n + k];
-				printf("a[%i,%i]: %i, ", i, k, a[i*m+k]);
-				printf("b[%i,%i]: %i, ", k, j, b[j*n + k]);
-				printf("a[%i,%i]*b[%i,%i]: %i\n", i,k,k,j, a[i*m+k]*b[j*n + k]);
-				printf("c[%i,%i]: %i\n", i, j, c[i*n+j]);
-				// printf("\n");
-			}
-		printf("\n");
-		}
 }
 
 void row_major_mult_nml (int* c, int* a, int* b, int n, int m, int l) {
@@ -102,13 +88,8 @@ void mat_sub (int* c, int*a , int* b, int n) {
 void strassen (int* c, int* a, int *b, int n) {
 	if (n == 1) {
 		c[0] += a[0]*b[0];
-		// *c = (*a)*(*b);
 		return;
 	}
-	// if (n == 2) {
-	// 	row_major_mult(c, a, b, n);
-	// 	return;
-	// }
 
 	int m = n/2;
 
